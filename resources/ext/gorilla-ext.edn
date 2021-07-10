@@ -94,7 +94,6 @@
                                  "codepen-embed" ["highlight.js/styles/codepen-embed.css"]
                                  "atelier-sulphurpool-dark" ["highlight.js/styles/atelier-sulphurpool-dark.css"]
                                  "idea" ["highlight.js/styles/idea.css"]}}
-
          :current {:highlight "default" ;"github"
                    }}
  :cljs-namespace [pinkgorilla.highlightjs.viewer]
