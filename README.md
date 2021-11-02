@@ -35,4 +35,4 @@ Add this alias to your deps.edn:
 
 - We use on goldly and webly to manage css and for snippet examples.
 - You can create a custom clojurescript project with shadow-cljs 
-  and ignore `src/goldly`.
+  and ignore `src/demo`.
