@@ -1,5 +1,5 @@
 {:paths ["src"
-         "resources" ; snippets
+         "resources" ; goldly-ext
          "target/node_modules" ; npm module css
          ]
  :deps
@@ -39,21 +39,41 @@
   ;; app
 
   :goldly
-  {:extra-deps {org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
-                org.pinkgorilla/goldly {:mvn/version "RELEASE"
-                                        :exclusions  [org.pinkgorilla/ui-code]}}
-   :exec-fn goldly-server.app/goldly-server-run!
+  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "RELEASE"
+                                        :exclusions  [org.pinkgorilla/ui-code]}
+                org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
+                org.pinkgorilla/ui-binaryclock  {:mvn/version "0.0.12"}}
+   :exec-fn goldly.app/goldly-server-run!
    :exec-args {:profile "watch2"
                :config {:google-analytics {:enabled false}
-                        :goldly {:lazy true}}}}
+                        :goldly {:lazy true
+                                 :autoload-cljs-dir  [; to load cljs files to repl state
+                                                      ; order is important
+                                                      "src/goldly/lib"
+                                                      "src/goldly/devtools"]
+                                 :routes {:app {"" :devtools
+                                                "devtools/scratchpad" :scratchpad
+                                                "devtools/viewer" :viewer
+                                                "devtools/environment" :environment}
+                                          :api {"rdocument/ns" :rdocument/ns
+                                                "rdocument/files" :rdocument/files
+                                                ["rdocument/file/" :ns "/" :name] :rdocument/file ; http://localhost:8000/api/viewer/file/demo.playground.cljplot/vega-spec.edn
+                                                }}}
+                        :devtools {:rdocument  {:storage-root "demo/rdocument/"
+                                                :url-root "/api/rdocument/file/"}
+                                   :collections {:demo [:clj "demo/notebook/"]}}}}}
 
   :npm-install
-  {:extra-deps {org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
-                org.pinkgorilla/goldly {:mvn/version "RELEASE"
-                                        :exclusions  [org.pinkgorilla/ui-code]}}
-   :exec-fn goldly-server.app/goldly-server-run!
+  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "RELEASE"
+                                        :exclusions  [org.pinkgorilla/ui-code]
+                                        org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
+                                        org.pinkgorilla/ui-binaryclock  {:mvn/version "0.0.12"
+                                        }}
+   :exec-fn goldly.app/goldly-server-run!
    :exec-args {:profile "npm-install"
-               :config {:goldly {}}}}
+               :config {:google-analytics {:enabled false}
+                        :goldly {:lazy true}}
+                        }}}
 
 ;
   }}

@@ -1,6 +1,5 @@
 (ns pinkgorilla.highlightjs.viewer
   (:require
-   [taoensso.timbre :as timbre :refer [debug info warn error]]
    ["highlight.js/lib/core" :as hljs]
    ["highlight.js/lib/languages/clojure" :as clojure]
    ["highlight.js/lib/languages/clojure-repl" :as clojure-repl]

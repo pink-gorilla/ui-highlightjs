@@ -1,4 +1,5 @@
 {:name "ui-highlightjs"
+ :lazy true
  :clj-require []
  :theme {:available {:highlight {"rainbow" ["highlight.js/styles/rainbow.css"]
                                  "grayscale" ["highlight.js/styles/grayscale.css"]
@@ -94,14 +95,10 @@
                                  "codepen-embed" ["highlight.js/styles/codepen-embed.css"]
                                  "atelier-sulphurpool-dark" ["highlight.js/styles/atelier-sulphurpool-dark.css"]
                                  "idea" ["highlight.js/styles/idea.css"]}}
-         :current {:highlight "default" ;"github"
+         :current {:highlight "github" ; "default" ;
                    }}
  :cljs-namespace [pinkgorilla.highlightjs.viewer]
  :cljs-ns-bindings {}
- :cljs-bindings {'code pinkgorilla.highlightjs.viewer/code-viewer}
- :pinkie {:p/code pinkgorilla.highlightjs.viewer/code-viewer}
- :lazy true
- :snippets [{:type :pinkie
-             :category :code
-             :id :highlightjs
-             :filename "snippets/highlightjs/highlight.edn"}]}
+ :cljs-bindings {'highlightjs pinkgorilla.highlightjs.viewer/code-viewer}
+ :pinkie {:p/highlightjs pinkgorilla.highlightjs.viewer/code-viewer}
+ }
