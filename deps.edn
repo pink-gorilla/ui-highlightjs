@@ -39,7 +39,7 @@
   ;; app
 
   :goldly
-  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "RELEASE"
+  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "0.3.57"
                                         :exclusions  [org.pinkgorilla/ui-code]}
                 org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
                 org.pinkgorilla/ui-binaryclock  {:mvn/version "0.0.12"}}
@@ -64,7 +64,7 @@
                                    :collections {:demo [:clj "demo/notebook/"]}}}}}
 
   :npm-install
-  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "RELEASE"
+  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "0.3.57"
                                         :exclusions  [org.pinkgorilla/ui-code]
                                         org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
                                         org.pinkgorilla/ui-binaryclock  {:mvn/version "0.0.12"
