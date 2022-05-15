@@ -1,7 +1,10 @@
 {:name "ui-highlightjs"
+ ; compile time
  :lazy true
- :clj-require []
- :theme {:available {:highlight {"rainbow" ["highlight.js/styles/rainbow.css"]
+ :cljs-namespace [pinkgorilla.highlightjs.viewer]
+ :cljs-bindings {'highlightjs pinkgorilla.highlightjs.viewer/code-viewer}
+ :cljs-ns-bindings {}
+ :theme {:available {:highlightjs {"rainbow" ["highlight.js/styles/rainbow.css"]
                                  "grayscale" ["highlight.js/styles/grayscale.css"]
                                  "brown-paper" ["highlight.js/styles/brown-paper.css"]
                                  "solarized-dark" ["highlight.js/styles/solarized-dark.css"]
@@ -95,10 +98,7 @@
                                  "codepen-embed" ["highlight.js/styles/codepen-embed.css"]
                                  "atelier-sulphurpool-dark" ["highlight.js/styles/atelier-sulphurpool-dark.css"]
                                  "idea" ["highlight.js/styles/idea.css"]}}
-         :current {:highlight "github" ; "default" ;
+         :current {:highlightjs "github" ; "default" ;
                    }}
- :cljs-namespace [pinkgorilla.highlightjs.viewer]
- :cljs-ns-bindings {}
- :cljs-bindings {'highlightjs pinkgorilla.highlightjs.viewer/code-viewer}
- :pinkie {:p/highlightjs pinkgorilla.highlightjs.viewer/code-viewer}
+
  }
