@@ -1,4 +1,4 @@
-
+(ns demo.notebook.highlightjs)
 
 ^:R
 [:div
