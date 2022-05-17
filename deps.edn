@@ -37,41 +37,32 @@
    :main-opts ["-m" "garamond.main"]}
 
   ;; app
-
-  :goldly
-  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "0.3.57"
-                                        :exclusions  [org.pinkgorilla/ui-code]}
-                org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
-                org.pinkgorilla/ui-binaryclock  {:mvn/version "0.0.12"}}
-   :exec-fn goldly.app/goldly-server-run!
-   :exec-args {:profile "watch2"
-               :config {:google-analytics {:enabled false}
-                        :goldly {:lazy true
-                                 :autoload-cljs-dir  [; to load cljs files to repl state
-                                                      ; order is important
-                                                      "src/goldly/lib"
-                                                      "src/goldly/devtools"]
-                                 :routes {:app {"" :devtools
-                                                "devtools/scratchpad" :scratchpad
-                                                "devtools/viewer" :viewer
-                                                "devtools/environment" :environment}
-                                          :api {"rdocument/ns" :rdocument/ns
-                                                "rdocument/files" :rdocument/files
-                                                ["rdocument/file/" :ns "/" :name] :rdocument/file ; http://localhost:8000/api/viewer/file/demo.playground.cljplot/vega-spec.edn
-                                                }}}
-                        :devtools {:rdocument  {:storage-root "demo/rdocument/"
-                                                :url-root "/api/rdocument/file/"}
-                                   :collections {:demo [:clj "demo/notebook/"]}}}}}
-
-  :npm-install
-  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "0.3.57"
-                                        :exclusions  [org.pinkgorilla/ui-code]}
-                org.pinkgorilla/ui-code {:mvn/version "0.0.19"}
-                org.pinkgorilla/ui-binaryclock  {:mvn/version "0.0.12"}}
-   :exec-fn goldly.app/goldly-server-run!
+  :goldly-build 
+  {:extra-paths ["target/webly" ; to include the sci-bindings info
+                 "demo"]
+   :extra-deps {org.pinkgorilla/goldly {:mvn/version "0.4.522"
+                                         :exclusions  [org.pinkgorilla/ui-highlightjs]}
+               ;org.pinkgorilla/ui-repl {:mvn/version "0.0.43"} ; reagent
+                }
+   :exec-fn goldly.app.build/goldly-build
    :exec-args {:profile "npm-install"
-               :config {:google-analytics {:enabled false}
-                        :goldly {:lazy true}}}}
+               :config  ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"]}}
+
+
+  :goldly-run 
+  {:extra-paths ["target/webly" ; to include the sci-bindings info
+                 "node_modules"
+                 "demo"]
+   :extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.522"
+                                         :exclusions  [org.pinkgorilla/ui-highlightjs]}
+                ;org.pinkgorilla/ui-repl {:mvn/version "0.0.43"} ; reagent atoms in cljs
+                }
+   :exec-fn modular.system/start!
+   :exec-args {:profile "jetty"
+               :services "goldly/services.edn"
+               :config  ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"]}}
+
+
 
 ;
   }}
