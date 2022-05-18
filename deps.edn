@@ -40,9 +40,9 @@
   :goldly-build 
   {:extra-paths ["target/webly" ; to include the sci-bindings info
                  "demo"]
-   :extra-deps {org.pinkgorilla/goldly {:mvn/version "0.4.522"
+   :extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.522"
                                          :exclusions  [org.pinkgorilla/ui-highlightjs]}
-               org.pinkgorilla/ui-repl {:mvn/version "0.0.43"} ; reagent
+               ;org.pinkgorilla/ui-repl {:mvn/version "0.0.43"} ; reagent
                 }
    :exec-fn goldly.app.build/goldly-build
    :exec-args {:profile "npm-install"

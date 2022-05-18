@@ -9,30 +9,17 @@
 ## Demo
 
 ```
-clojure -X:goldly
+clojure -X:goldly-run
 ```
 
-Navigate your webbrowser to port 8000. 
+Navigate your webbrowser to port 8080. 
 
 
-## Use with [goldly](https://github.com/pink-gorilla/goldly)
+## build your own bundle (for testing):
 
-This library provides the pinkie ui renderer [:p/highlightjs srccode]
-
-Add this alias to your deps.edn:
 
 ```
- :goldly
-  {:extra-deps {org.pinkgorilla/goldly {:mvn/version "0.2.39"}
-                org.pinkgorilla/ui-highlightjs {:mvn/version "0.0.3"}}
-   :exec-fn goldly.app/goldly-server-run!
-   :exec-args {:profile "watch"
-               :config {:goldly {}}}}
+clj -X:goldly-build :profile '"npm-install"'
+clj -X:goldly-build :profile '"compile2"'
+clojure -X:goldly-run
 ```
-
-
-## Use outside of goldly and webly
-
-- We use on goldly and webly to manage css and for snippet examples.
-- You can create a custom clojurescript project with shadow-cljs 
-  and ignore `src/demo`.
