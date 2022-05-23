@@ -1,4 +1,4 @@
-(ns pinkgorilla.highlightjs.viewer
+(ns ui.highlightjs
   (:require
    ["highlight.js/lib/core" :as hljs]
    ["highlight.js/lib/languages/clojure" :as clojure]
@@ -21,7 +21,7 @@
 
 ;(.initHighlightingOnLoad hljs)
 
-(defn code-viewer [code]
+(defn highlightjs [code]
   [:pre.clojure
    [:code {:class "clojure"
            ;:ref #(when % (.highlightBlock hljs %))

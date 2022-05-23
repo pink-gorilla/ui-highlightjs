@@ -1,9 +1,8 @@
 {:name "ui-highlightjs"
  ; build
  :lazy false ; highlightjs needs static init, so lazy load might fail.
- :cljs-namespace [pinkgorilla.highlightjs.viewer]
- :cljs-bindings {'highlightjs pinkgorilla.highlightjs.viewer/code-viewer}
- :cljs-ns-bindings {}
+ :cljs-namespace [ui.highlightjs]
+ :cljs-ns-bindings {'ui.highlightjs {'highlightjs ui.highlightjs/highlightjs}}
  ; theme
  :theme
  {:available
@@ -31,9 +30,8 @@
                  "atelier-lakeside-dark" ["highlight.js/styles/atelier-lakeside-dark.css"]
                  "atom-one-dark" ["highlight.js/styles/atom-one-dark.css"]
                  "ir-black" ["highlight.js/styles/ir-black.css"]
-                 "github" [ "gorilla-code.css"
-                           "highlight.js/styles/github.css"
-                           ]
+                 "github" ["gorilla-code.css"
+                           "highlight.js/styles/github.css"]
                  "magula" ["highlight.js/styles/magula.css"]
                  "atelier-sulphurpool-light" ["highlight.js/styles/atelier-sulphurpool-light.css"]
                  "night-owl" ["highlight.js/styles/night-owl.css"]

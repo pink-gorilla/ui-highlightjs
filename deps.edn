@@ -36,31 +36,25 @@
   {:extra-deps {com.workframe/garamond {:mvn/version "0.4.0"}}
    :main-opts ["-m" "garamond.main"]}
 
-  ;; app
-  :goldly-build 
-  {:extra-paths ["target/webly" ; to include the sci-bindings info
-                 "demo"]
-   :extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.522"
-                                         :exclusions  [org.pinkgorilla/ui-highlightjs]}
-               ;org.pinkgorilla/ui-repl {:mvn/version "0.0.43"} ; reagent
-                }
-   :exec-fn goldly.app.build/goldly-build
-   :exec-args {:profile "npm-install"
-               :config  ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"]}}
-
-
-  :goldly-run 
+  :goldly
   {:extra-paths ["target/webly" ; to include the sci-bindings info
                  "node_modules"
                  "demo"]
-   :extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.522"
-                                         :exclusions  [org.pinkgorilla/ui-highlightjs]}
+   :extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.545"
+                                             :exclusions  [org.pinkgorilla/ui-highlightjs]}
                 ;org.pinkgorilla/ui-repl {:mvn/version "0.0.43"} ; reagent atoms in cljs
                 }
    :exec-fn modular.system/start!
    :exec-args {:profile "jetty"
                :services "goldly/services.edn"
                :config  ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"]}}
+
+   :build
+  {:exec-fn goldly.app.build/goldly-build
+   :exec-args {:profile "npm-install"}}
+
+
+
 
 
 
