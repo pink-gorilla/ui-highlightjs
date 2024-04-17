@@ -33,7 +33,7 @@ jobs:
       shell: bash
     - name: npm-install (css resources)
       run: |
-        clojure -X:webly:npm-install"
+        clojure -X:webly:npm-install
         ./scripts/copy_res.sh
     - name: Release
       if: success()
