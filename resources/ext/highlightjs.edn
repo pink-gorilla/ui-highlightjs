@@ -6,7 +6,7 @@
  ; theme
  :theme
  {:available
-  {:highlightjs {true ["gorilla-code.css"]
+  {:highlightjs {true ["highlight.js/gorilla-code.css"]
                  "rainbow" ["highlight.js/styles/rainbow.css"]
                  "grayscale" ["highlight.js/styles/grayscale.css"]
                  "brown-paper" ["highlight.js/styles/brown-paper.css"]

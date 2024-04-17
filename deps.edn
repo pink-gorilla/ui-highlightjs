@@ -1,14 +1,15 @@
 {:paths ["src"
-         "resources" ; goldly-ext
+         "resources" ; ext
          "target/node_modules" ; npm module css
          ]
  :deps
  {org.clojure/clojure    {:mvn/version "1.10.3"}}
  :aliases
- {;https://github.com/applied-science/deps-library
-  :release
-  {:extra-deps {applied-science/deps-library {:mvn/version "0.4.0"}}
-   :main-opts ["-m" "applied-science.deps-library"]}
+ {;github ci
+  :build {:deps {io.github.clojure/tools.build {:mvn/version "0.9.6"}
+                slipset/deps-deploy {:mvn/version "0.2.1"}
+                babashka/fs {:mvn/version "0.0.5"}}
+         :ns-default build}
 
   ; https://github.com/weavejester/cljfmt
   :cljfmt
@@ -23,38 +24,27 @@
   {:extra-deps {clj-kondo/clj-kondo {:mvn/version "RELEASE"}}
    :main-opts ["-m" "clj-kondo.main" "--lint" "src"]}
 
-  :outdated
-  {:extra-deps {com.github.liquidz/antq {:mvn/version "RELEASE"}}
-   :main-opts ["-m" "antq.core"]}
+; ci
 
-  :check
-  {:extra-deps {athos/clj-check {:git/url "https://github.com/athos/clj-check.git"
-                                 :sha "0ca84df1357d71429243b99908303f45a934654c"}}
-   :main-opts ["-m" "clj-check.check"]}
+  :webly {:extra-deps {org.pinkgorilla/webly {:mvn/version "0.5.671"}
+                       org.pinkgorilla/ui-repl {:mvn/version "0.1.104"}}
+          :exec-fn webly.app.app/webly-build
+          :exec-args {:config [{:build {:disabled-extensions #{; extensions using sci-configs will not work in webly.
+                                                               "reagent" "re-frame"
+                                                               "funcool-promesa"
+                                                               "applied-science.js-interop"
+                                                                ; webly2 is now in webly. needs to be removed from ui-repl.
+                                                               "webly2"
+                                                               "ui-repl"
+                                                               "cljs-ajax"}}}]
+                      :profile "npm-install"}}
 
-  :garamond
-  {:extra-deps {com.workframe/garamond {:mvn/version "0.4.0"}}
-   :main-opts ["-m" "garamond.main"]}
-
-  :goldly
-  {:extra-paths ["target/webly" ; to include the sci-bindings info
-                 "node_modules"
-                 "demo"]
-   :extra-deps {org.pinkgorilla/goldly-docs {:mvn/version "0.4.545"
-                                             :exclusions  [org.pinkgorilla/ui-highlightjs]}
-                ;org.pinkgorilla/ui-repl {:mvn/version "0.0.43"} ; reagent atoms in cljs
-                }
-   :exec-fn modular.system/start!
-   :exec-args {:profile "jetty"
-               :services "goldly/services.edn"
-               :config  ["webly/config.edn" "goldly/config.edn" "goldly/docs-config.edn"]}}
-
-   :build
-  {:exec-fn goldly.app.build/goldly-build
-   :exec-args {:profile "npm-install"}}
-
-
-
+  :npm-install {:exec-args {:profile "npm-install"}}
+  :compile {:exec-args {:profile "compile2"}}
+  :release {:exec-args {:profile "release"}}
+  :release-adv {:exec-args {:profile "release-adv"}}
+  :static {:exec-args {:profile "static"}}
+  :ci {:exec-args {:profile "ci"}}
 
 
 
