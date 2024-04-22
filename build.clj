@@ -36,7 +36,9 @@
   (println "Building jar ..")
   (b/write-pom opts)
   (b/copy-dir {:src-dirs ["src"
-                          "resources"]
+                          "resources"
+                          "target/node_modules" ; ship css from npm/codemirror in jar
+                          ]
                :target-dir class-dir})
   (b/jar {:class-dir class-dir
           :jar-file jar-file}))
