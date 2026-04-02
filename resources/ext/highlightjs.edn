@@ -1,8 +1,8 @@
-{:name "ui-highlightjs"
- ; build
- :lazy false ; highlightjs needs static init, so lazy load might fail.
- :cljs-namespace [ui.highlightjs]
- :cljs-ns-bindings {'ui.highlightjs {'highlightjs ui.highlightjs/highlightjs}}
+{:extension/name :ui-highlightjs
+ ; cljs-build
+ :cljs/module :main ; highlightjs needs static init, so lazy load might fail.
+ :cljs/namespace [ui.highlightjs]
+ :cljs/ns-bindings {'ui.highlightjs {'highlightjs ui.highlightjs/highlightjs}}
  ; theme
  :theme
  {:available
